@@ -8,7 +8,7 @@ https://github.com/ffevotte/isend-mode.el
 3. cd clojure
 4. java -cp clojure-1.7.0.jar clojure.main
 5. Open a .clj file (in top half)
-6. M-x isend-associate RET (top)
+6. M-x is-as TAB, RET (isend-associate, top) 
 7. Type sh, TAB, RET (*shell*)
 8. Add a comment line (can be anything) as the first block
 9. Use shortcut keys S-RET (block) and M-RET or C-RET (buffer) to send

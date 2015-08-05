@@ -1,5 +1,5 @@
-;; test API
-;; https://clojure.github.io/clojure/clojure.test-api.html
+;;; test API
+;;; https://clojure.github.io/clojure/clojure.test-api.html
 
 (use '[clojure.test :only [is]])
 
