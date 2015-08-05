@@ -1,0 +1,59 @@
+Emacs and isend-mode setup
+
+Get isend-mode from
+https://github.com/ffevotte/isend-mode.el
+
+1. <F12> shortcut key (or C-x 2 to split)
+2. M-x shell (in bottom half)
+3. cd clojure
+4. java -cp clojure-1.7.0.jar clojure.main
+5. Open a .clj file (in top half)
+6. M-x isend-associate RET (top)
+7. Type sh, TAB, RET (*shell*)
+8. Add a comment line (can be anything) as the first block
+9. Use shortcut keys S-RET (block) and M-RET or C-RET (buffer) to send
+
+Include in .emacs 
+
+(global-set-key (kbd "<f12>") 'split-window-below)
+
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (local-set-key [M-left] 'backward-sexp)
+            (local-set-key [M-right] 'forward-sexp)
+
+            (local-set-key (kbd "M-k") 'kill-sexp)
+
+            (local-set-key [S-return] 'my-isend-send-block)
+            (local-set-key [C-return] 'my-isend-send-buffer)
+            (local-set-key [M-return] 'my-isend-send-buffer)))
+
+(defun my-isend-send-line ()
+  (interactive)
+  (set-mark (line-end-position))
+  (beginning-of-line)
+  (call-interactively 'isend-send)
+  ;; (previous-line)
+  (end-of-line))
+
+(defun my-isend-send-block ()
+  (interactive)
+  (set-mark (line-end-position))
+
+  (save-excursion
+    (let ((lines-of-block 0))
+      (while (or (equal (line-beginning-position) 0) (not (line-emptyp)))
+        (previous-line)
+        (beginning-of-line)
+        (set 'lines-of-block (+ 1 lines-of-block)))
+      (beginning-of-line)
+      (call-interactively 'isend-send)
+      ;;(dotimes (i lines-of-block)
+      ;;  (next-line))
+      (end-of-line))))
+
+(defun my-isend-send-buffer ()
+  (interactive)
+  (mark-whole-buffer)
+  (call-interactively 'isend-send)
+  (end-of-buffer))
