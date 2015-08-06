@@ -1,3 +1,4 @@
 Programming Clojure, 2nd Ed.
 
 05.aug.15 p. 30
+05.aug.15 p. 34
