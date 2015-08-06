@@ -13,10 +13,3 @@
 (defn hello [name] (str "Hello, " name))
 
 (hello "Ken")
-
-;;; p. 20
-;;; to view source code
-
-(use 'clojure.repl)
-(source identity)
-

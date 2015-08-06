@@ -9,6 +9,12 @@
 ;;; (find-doc regexp) will search documentation that matches the given regexp
 ;;; It searches inside the contents so may return a lot of functions
 
+;;; p. 20
+;;; to view source code
+
+(use 'clojure.repl)
+(source identity)
+
 ;;; p. 29
 ;;; Because data structures are immutable, any data structure can be a key
 ;;; in a map
