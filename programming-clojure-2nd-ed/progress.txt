@@ -3,3 +3,4 @@ Programming Clojure, 2nd Ed.
 05.aug.15 p. 30
 05.aug.15 p. 34
 06.aug.15 p. 58
+07.aug.15 p. 108

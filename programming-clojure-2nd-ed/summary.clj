@@ -1,5 +1,7 @@
 ;;;; Page numbers of when functions are first mentioned
 
+;;; after finishing reading the book, sort lines by function, with Clojure
+
 ;;; p.6   (defrecord name [arg1 arg2...])
 ;;; p.14  (conj coll item)
 ;;; p.15  (atom initial-state)  the most basic reference type
@@ -9,7 +11,7 @@
 ;;; p.17  (refer quoted-namespace-symbol)  create mappings for library's names
 ;;; p.17  (use quoted-namespace-symbol)  requires and refers together
 ;;; p.18  (use :reload quoted-namespace-symbol)
-;;; doc   (use :only list-of-symbols)
+;;; (doc) (use :only list-of-symbols)
 ;;; p.18  (doc name)
 ;;; p.19  (find-doc s)  search a regexp inside anything outputted by doc
 ;;; p.20  (clojure.repl/source a-symbol)  show source code
@@ -21,7 +23,7 @@
 ;;; p.30  (->Book "title" "author")  instantiate a record
 ;;; p.32  (defn name doc-str? attr-map? [params*] body)
 ;;; p.33  (defn name doc-str? attr-map? ([params*] body)+)  multiple arities
-;;; p.35  (fn [params*] body)  anonymous function
+;;; p.35  (fn name? [params*] body)  anonymous function
 ;;; p.35  #(body % %2 %3)  shorthand, % is the same as %1
 ;;; p.37  (var a-symbol)  refer to a var directly, same as #' (var-quote)
 ;;; p.38  (let [bindings*] exprs*)  bindings are pairs, value is last expr
@@ -71,6 +73,7 @@
 ;;; p.64  (take-while pred coll)
 ;;; p.64  (complement f)  reverses the behavior of the function f
 ;;; p.64  (drop-while pred coll)
+;;; (doc) (drop n coll)  returns a lazy seq of all but first n items
 ;;; p.65  (split-at index coll)
 ;;; p.65  (split-with pred coll)
 ;;; p.65  (every? pred coll)
@@ -82,6 +85,55 @@
 ;;; p.67  (sort comp? coll)
 ;;; p.67  (sort-by a-fn comp? coll)
 ;;; p.68  (for [binding-form coll-expr filter-expr? ...] expr)
+;;; p.70  (doall coll)  forces evaluation of coll (realize fully)
+;;; p.70  (dorun coll)  walks coll without keeping past elements in memory
+;;; p.72  (re-matcher regexp string)  not recommended, use re-seq instead
+:;; p.72  (re-find m)
+;;; p.73  (re-seq regexp string)
+;;; p.74  (file-seq dir)  a depth-first tree seq
+;;; p.74  (count coll)
+;;; p.74  (clojure.java.io/reader)
+;;; p.74  (with-open ...)
+;;; p.75  (line-seq rdr)
+;;; p.76  (clojure.xml/parse file)
+;;; p.76  (xml-seq root)
+;;; p.77  (peek '(1 2 3)) -> 1
+;;; p.77  (pop '(1 2 3)) -> (2 3)  list cannot be empty
+;;; p.77  (peek [1 2 3]) -> 3
+;;; p.77  (pop [1 2 3]) -> [1 2]
+;;; p.77  (get vec index)
+;;; p.78  ([:a :b :c] 1) -> :b
+;;; p.78  (assoc [0 1 2 3 4] 2 :two) -> [0 1 :two 3 4]
+;;; p.78  (subvec vec start end?)
+;;; p.78  (keys map)
+;;; p.78  (vals map)
+;;; p.79  (get map key value-if-not-found?)
+;;; p.79  (:key {:key "val"})  keywords are functions
+;;; p.80  (contains? map key)  tests for the presence of a key
+;;; p.80  (dissoc map key & ks)  returns a map with the given keys removed
+;;; p.80  (select-keys map keyseq)  keeps only keyseq keys
+;;; p.80  (merge & maps)  combines maps, giving preference to rightmost map
+;;; p.81  (merge-with merge-fn & maps)  fn combines values with the same key
+;;; p.81  (concat x y & z)  concatenates elements in given colls
+;;; p.82  ('clojure.set/union
+;;; p.82  ('clojure.set/intersection
+;;; p.82  ('clojure.set/difference
+;;; p.82  ('clojure.set/select 
+;;; p.83  (rename relation rename-map)
+;;; p.83  (select pred relation)
+;;; p.83  (project relation keys)
+;;; p.83  (join relation-1 relation-2 keymap?)
+;;; p.92  (letfn [fnspecs] & body)
+;;; p.94  (lazy-seq & body)
+;;; p.97  (lazy-cat & colls)
+;;; p.99  (when-let binding-form-test & body)
+;;; p.100 (partition size step? coll)
+;;; p.101 (defonce a-symbol initial-value?)  sets root binding if it's not set
+;;; p.101 (defn- name & args-as-for-defn)  function private to its namespace
+;;; p.101 (comp f & fs)  composes two or more functions
+;;; p.102 (partial f & partial args)
+;;; p.106 (trampoline f & partial-args)
+;;; p.
 ;;; p.
 ;;; p.
 ;;; p.
