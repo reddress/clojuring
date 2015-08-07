@@ -1,3 +1,7 @@
+;;;; Page numbers of when functions are first mentioned
+
+;;; after finishing reading the book, sort lines by function, with Clojure
+
 ;;; p.6   (defrecord name [arg1 arg2...])
 ;;; p.14  (conj coll item)
 ;;; p.15  (atom initial-state)  the most basic reference type
@@ -13,10 +17,8 @@
 ;;; p.20  (clojure.repl/source a-symbol)  show source code
 ;;; p.26  (str & args)  concatenates strings and skips nil
 ;;; p.27  (apply f args* argseq)  args* are optional
-;;; p.27  (true? expr)
-;;; p.27  (false? expr)
-;;; p.28  (nil? expr)
-;;; p.28  (zero? expr)
+;;; p.27  (true? expr) (false? expr)
+;;; p.28  (nil? expr) (zero? expr)
 ;;; p.29  (get the-map key not-found-val?)  instead of using keyword as fn
 ;;; p.30  (->Book "title" "author")  instantiate a record
 ;;; p.32  (defn name doc-str? attr-map? [params*] body)
