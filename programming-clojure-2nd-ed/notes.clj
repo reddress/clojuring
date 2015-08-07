@@ -18,3 +18,7 @@
 ;;; p. 29
 ;;; Because data structures are immutable, any data structure can be a key
 ;;; in a map
+
+;;; p. 65
+;;; Sets act as functions. #{\a\e\i\o\u} is the function that tests to see
+;;; whether its argument is a vowel.

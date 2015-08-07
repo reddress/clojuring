@@ -49,5 +49,45 @@
 ;;; p.56  (seq coll)  returns a seq on any seq-able collection
 ;;; p.56  (next aseq)  returns the seq of the rest of aseq
 ;;; p.57  (class expr)  returns the class of expr
+;;; p.58  (sorted-set & elements)  
+;;; p.59  (sorted-map & elements)
+;;; p.59  (conj coll element & elements)  adds one or more elements
+;;; p.59  (into to-coll from-coll)  adds all items in a collection to another
+;;; p.61  (range start? end step?)  includes start (default 0) but not end
+;;; p.61  (repeat n x)  repeats n times, infinitely if n is omitted
+;;; p.62  (iterate f x)  begin with x and repeat forever, applying f each time
+;;; p.62  (take n seq)  returns a lazy sequence of the first n items
+;;; p.62  (cycle coll)
+;;; p.62  (interleave & colls)
+;;; p.63  (interpose separator coll)
+;;; p.63  (clojure.string/join separator sequence)
+;;; p.63  (list & elements)
+;;; p.63  (vector & elements)
+;;; p.63  (hash-set & elements)
+;;; p.63  (hash-map key-1 val-1 ...)
+;;; p.63  (set coll)
+;;; p.64  (vec coll)
+;;; p.64  (filter pred coll)
+;;; p.64  (take-while pred coll)
+;;; p.64  (complement f)  reverses the behavior of the function f
+;;; p.64  (drop-while pred coll)
+;;; p.65  (split-at index coll)
+;;; p.65  (split-with pred coll)
+;;; p.65  (every? pred coll)
+;;; p.65  (some pred coll)
+;;; p.66  (not-every? pred coll)
+;;; p.66  (not-any? pred coll)
+;;; p.66  (map f coll)  can take multiple collections when f takes many args
+;;; p.67  (reduce f coll)  applies f on first two elements, then result to 3rd
+;;; p.67  (sort comp? coll)
+;;; p.67  (sort-by a-fn comp? coll)
+;;; p.68  (for [binding-form coll-expr filter-expr? ...] expr)
 ;;; p.
-
+;;; p.
+;;; p.
+;;; p.
+;;; p.
+;;; p.
+;;; p.
+;;; p.
+;;; p.

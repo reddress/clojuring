@@ -14,3 +14,10 @@
 (defn index-filter [pred coll]
   (when pred
     (for [[idx elt] (indexed coll) :when (pred elt)] idx)))
+
+;;; p. 68
+(for [file "ABCDEFGH" rank (range 1 9)] (format "%c%d" file rank))
+
+(count
+ (for [suit "CDHS" rank "A23456789TJQK"] (format "%c%c" rank suit)))
+

@@ -203,7 +203,8 @@ the associated buffer using \\[isend-send] (or `isend-send').
 \\{isend-mode-map}"
   :init-value nil
   :lighter    " Isend"
-  :keymap     '(([C-return] . isend-send)))
+  ;; :keymap     '(([M-return] . isend-send))
+  )
 
 (defvar isend--command-buffer)
 (make-variable-buffer-local 'isend--command-buffer)
@@ -283,11 +284,11 @@ the region is active, all lines spanned by it are sent."
 
         ;; Other buffer: call whatever is bound to 'RET'
         (t
-         (funcall (key-binding (kbd "RET"))))))))
+         (funcall (key-binding (kbd "RET")))))))))
 
  ;; Move point to the next line
- (when isend-forward-line
-   (isend--next-line)))
+;;; (when isend-forward-line
+;;; (isend--next-line)))
 
 
 
@@ -311,7 +312,8 @@ The result is a cons cell of the form (beg . end)"
    ;; If the region is active, use region boundaries
    ((use-region-p)
     (cons (region-beginning)
-          (- (region-end) 1)))
+          ;;; (- (region-end) 1)))
+          (region-end)))
 
    ;; If the region is not active and `isend-skip-empty-lines' is non-nil,
    ;; move forward to the first non-empty line.
@@ -334,10 +336,10 @@ The region is expanded so that no line is only partially sent."
          (end (cdr bds)))
 
     ;; Expand the region to span whole lines
-    (goto-char beg)
-    (setq beg (line-beginning-position))
-    (goto-char end)
-    (setq end (line-end-position))
+    ;;; (goto-char beg)
+    ;;; (setq beg (line-beginning-position))
+    ;;; (goto-char end)
+    ;;; (setq end (line-end-position))
     (when (= beg (point-max))
       (error "Nothing more to send!"))
     (cons beg end)))
