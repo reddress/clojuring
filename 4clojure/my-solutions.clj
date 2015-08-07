@@ -1,3 +1,5 @@
+:;;; ernesto ) username
+
 ;;;; #23 Reverse a Sequence
 
 ;;; original solution
