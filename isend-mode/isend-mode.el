@@ -202,9 +202,13 @@ the associated buffer using \\[isend-send] (or `isend-send').
 
 \\{isend-mode-map}"
   :init-value nil
-  :lighter    " Isend"
-  ;; :keymap     '(([M-return] . isend-send))
-  )
+  :lighter    " Isend")
+
+;;; MODIFICATION because in Emacs 24.5, cannot override with
+;;; local-set-key
+  ;;; :lighter    " Isend"
+  ;;; :keymap     '(([M-return] . isend-send))
+
 
 (defvar isend--command-buffer)
 (make-variable-buffer-local 'isend--command-buffer)
@@ -335,6 +339,7 @@ The region is expanded so that no line is only partially sent."
          (beg (car bds))
          (end (cdr bds)))
 
+    ;;; MODIFICATION for being able to send sexps
     ;; Expand the region to span whole lines
     ;;; (goto-char beg)
     ;;; (setq beg (line-beginning-position))
