@@ -36,3 +36,22 @@
 
 ;;; p. 107
 ;;; add # to any recursive tail calls when using trampoline
+
+;;; p. 109
+;;; to break a recursion, all you have to do is wrap the recursion with
+;;; lazy-seq
+
+;;; p. 111
+;;; expose sequences, instead of functions
+;;; (def f-seq (map f (iterate inc 0)))
+;;; then use (nth f-seq n)
+
+;;; p. 113
+;;; Refs manage coordinated, synchronous changes
+;;; Atoms manage uncoordinated, synchronous changes
+;;; Agents manage asynchronous changes
+;;; Vars manage thread-local state
+
+;;; p. 121
+;;; Refs are great for coordinated access, but for updating a single piece of
+;;; isolated data, prefer an atom, which are lighter-weight

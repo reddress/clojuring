@@ -42,3 +42,36 @@ reduce conj ()
 ;;; expression becomes (conj (conj ... (conj nil 1) 2) 3) 4) 5)
 ;;; because we are dealing with a list, the result is '(5 4 3 2 1)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; #26 Fibonacci Sequence
+
+(defn single-let-fib [n]
+  (letfn [(fib-iter [n result]
+                    (if (= n 2)
+                      result
+                      (let [ct (count result)]
+                        (recur (- n 1) (conj result (+ (nth result (- ct 1))
+                                                      (nth result (- ct 2))))))))]
+    (fib-iter n [1 1])))
+
+;;; daowen's solution
+(defn daowen-fib [n]
+  (take n ((fn fib [x y]
+             (lazy-seq
+              (cons x (fib y (+ x y)))))
+           1 1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Factorial
+
+;;; notice that factorial is equivalent to sum of a range
+
+(#(apply * (drop 1 (range (+ % 1)))) 5)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; #46 Flipping out - Flip first and second arguments
+
+(fn flip [f]
+  (fn [a b]  
+    (f b a)))

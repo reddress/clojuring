@@ -131,6 +131,18 @@
 ;;; p.101 (comp f & fs)  composes two or more functions
 ;;; p.102 (partial f & partial args)
 ;;; p.106 (trampoline f & partial-args)
+;;; p.108 (declare ...)
+;;; p.109 (defmulti ...)
+;;; p.109 (defmethod ...)
+;;; p.111 (memoize f)
+;;; p.115 (ref initial-state options)  :validator fn  :meta metadata-map
+;;; p.116 (deref reference)
+;;; p.116 @reference  same as deref
+;;; p.116 (ref-set reference new-value)
+;;; p.116 (dosync & exprs)
+;;; p.118 (alter ref update-fn & args)
+;;; p.118 (my-update-fn thing-to-update & optional-other-args)
+;;; p.119 (commute ref update-fn & args)  preferably use alter
 ;;; p.
 ;;; p.
 ;;; p.
@@ -141,3 +153,10 @@
 ;;; p.
 ;;; p.
 ;;; p.
+;;; p.
+;;; p.
+;;; p.
+;;; p.
+;;; p.
+;;; p.
+
