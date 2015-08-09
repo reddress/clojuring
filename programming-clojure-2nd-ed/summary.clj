@@ -1,4 +1,3 @@
-;;; p.6   (defrecord name [arg1 arg2...])
 ;;; p.14  (conj coll item)
 ;;; p.15  (atom initial-state)  the most basic reference type
 ;;; p.15  (def symbol initial-value?)
@@ -143,8 +142,33 @@
 ;;; p.118 (alter ref update-fn & args)
 ;;; p.118 (my-update-fn thing-to-update & optional-other-args)
 ;;; p.119 (commute ref update-fn & args)  preferably use alter
-;;; p.
-;;; p.
+;;; p.122 (atom initial-state options?)  :validator fn  :meta metadata-map
+;;; p.122 (reset! an-atom newval)  sets the value of an atom
+;;; p.123 (swap! an-atom f & args)  calls f plus additional args
+;;; p.123 (agent initial-state options*)  :validator fn  :meta metadata-map 
+;;; p.123 (send an-agent update-fn & args)  like commuting a ref
+;;; p.124 (await & agents)  causes current thread to block, no timeout
+;;; p.124 (await-for timeout-millis & agents)
+;;; p.125 (agent-errors ...)
+;;; p.125 (clear-agent-errors agent)  returns to pre-error state
+;;; p.126 (send-off ...)  used for actions that expect to block
+;;; p.128 (binding [bindings] & body)  have dynamic scope inside a thread
+;;; p.130 (set! var-symbol new-value)  should be used rarely
+;;; p.135 (butlast ...)
+;;; p.139 (proxy ...)
+;;; p.139 (proxy-super ...)
+;;; p.140 (doto ...)
+;;; p.144 (-> ...)
+;;; p.146 (condp ...)
+;;; p.147 (definterface name & sigs)
+;;; p.148 (defprotocol name & opts+sigs)
+;;; p.148 (extend type & proto+mmaps)
+;;; p.149 (extend-type type & specs)
+;;; p.149 (extend-protocol protocol & specs)
+;;; p.152 (deftype name [& fields] & opts+specs)
+;;; p.157 (defrecord name [& fields] & opts+specs)  specialized type like map
+;;; p.158 (update-in ...)
+;;; p.162 (reify & opts+specs)
 ;;; p.
 ;;; p.
 ;;; p.
