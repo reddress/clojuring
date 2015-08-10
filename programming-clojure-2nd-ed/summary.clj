@@ -169,18 +169,52 @@
 ;;; p.157 (defrecord name [& fields] & opts+specs)  specialized type like map
 ;;; p.158 (update-in ...)
 ;;; p.162 (reify & opts+specs)
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-;;; p.
-
+;;; p.167 (defmacro name doc-str? attr-map? [params*] body)
+;;; p.170 (macroexpand-1 form)
+;;; p.170 (macroexpand form)
+;;; p.171 (when test & body)
+;;; p.171 (when-not test & body)
+;;; p.172 (gensym prefix?)
+;;; p.172 prefix#  inside syntax-quoted, create gensym
+;;; p.172 ~@  splicing unquote
+;;; p.172 `form  syntax quote
+;;; p.172 ~form  unquote
+;;; p.179 (and & exprs)
+;;; p.179 (or & exprs)
+;;; p.179 (comment & exprs)
+;;; p.180 (create-struct & key-symbols)
+;;; p.180 (defstruct name & key-symbols)
+;;; p.181 (declare & names)
+;;; p.182 (delay & exprs)
+;;; p.183 (force x)
+;;; p.183 (with-out-str & exprs)
+;;; p.184 (assert expr)
+;;; p.189 (defmulti name dispatch-fn)
+;;; p.190 (defmethod name dispatch-val & fn-tail)  :default may be dispatch
+;;; p.191 (isa? child parent)
+;;; p.193 (prefer-method multi-name preferred-dispatch less-preferred-disp)
+;;; p.194 ::keyword  will resolve in the current namespace
+;;; p.194 (alias short-name-symbol namespace-symbol)
+;;; p.195 (struct ...)
+;;; p.197 (derive child parent)
+;;; p.198 (use '[clojure.inspector :only (inspect-tree)])
+;;; p.199 (use '[clojure.test :only (is)])
+;;; p.205 (with-open [name init-form] & body)
+;;; p.205 (spit file content)
+;;; (doc) (slurp f & opts)
+;;; p.206 (try expr* catch-clause* finally-clause?)
+;;; p.209 (dotimes bindings & body)
+;;; p.214 (proxy class-and-interfaces super-cons-args & fns)
+;;; p.217 (make-array class dim & more-dims)
+;;; p.217 (aset java-array index value)
+;;; p.217 (aget java-array index)
+;;; p.217 (alength java-array)
+;;; p.218 (to-array seq)  always creates an Object array
+;;; p.218 (into-array type? seq)
+;;; p.218 (amap a idx ret expr)
+;;; p.219 (areduce a idx ret init expr)
+;;; p.235 (require '[clojure.test.generative.generators :as gen])
+;;; p.236 (gen/int)
+;;; p.236 (gen/vec gen/boolean)
+;;; p.236 (dir ns)
+;;; p.239 (defspec ...)
