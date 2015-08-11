@@ -20,3 +20,12 @@
     2)
   
   )
+
+
+(time
+ (nth
+  ((fn my-lazy-range [n]
+     (lazy-seq 
+      (cons n (my-lazy-range (inc n)))))
+   0) 999999))
+
