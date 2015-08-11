@@ -136,3 +136,12 @@ reduce conj ()
 ;;;; #27 Palindrome detector
 
 ;;; use (seq %) to convert lists, strings, vectors... to an expanded seq
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; #49 Split a sequence
+
+#(concat (list (take % %2)) (list (drop % %2)))
+
+;;; daowen's solution
+
+(juxt take drop)
