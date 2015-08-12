@@ -644,6 +644,18 @@ reduce conj ()
  '(1 1 2 3 1 1 1 2 3 3 3 3 3))
 
 ;;;; how does (into {} ... ) work?
+
+;;;; daowen's solution for map defaults
 (#(into {} (for [k %2] [k %])) 0 [:a :b])
 
 (for [k [:a :b]] [k 0])
+
+(into {} (for [k [:a :b]] [k 0]))
+
+(into {} '([:a 0] [:b 0]))
+
+(into {} (for [a (range 0 9 2)] [a (inc a)]))
+
+;;; https://clojuredocs.org/clojure.core/into
+;;; maps can be constructed from a sequence of 2-vectors or sequence of maps
+
