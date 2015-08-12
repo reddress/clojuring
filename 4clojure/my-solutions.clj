@@ -659,3 +659,29 @@ reduce conj ()
 ;;; https://clojuredocs.org/clojure.core/into
 ;;; maps can be constructed from a sequence of 2-vectors or sequence of maps
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; #54 Partition a sequence
+
+
+(conj (conj () (take 3 (drop 6 (range 9)))) (take 3 (drop 3 (range 9))))
+
+((fn [n s]
+   (let [ct (count s)
+         num-partitions (quot ct n)
+         reduced-ct (* num-partitions n)]
+     (letfn [(iter [n s i]
+                   (if (< i 0)
+                     []
+                     (conj (iter n s (dec i)) (take n (drop (* i n) s)))))]
+       (iter n (take reduced-ct s) (dec num-partitions)))))
+ 2 (range 8))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; #92 Read Roman numerals (hard)
+
+;;; idea: keep track of running total. remove "subtractive" values first.
+;;; as substring is romoved, total increases.
+;;; loop, removing while substring is found in numerals string
+;;; remove in order, CM = 900, CD = 400, XC = 90, XL = 40, IX = 9, IV = 4
+;;; M = 1000, D = 500, C = 100, L = 50, X = 10, V = 5, I = 1
