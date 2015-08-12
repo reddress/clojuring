@@ -618,14 +618,14 @@ reduce conj ()
 
 (map #(nth q43 % 0) (take 3 (iterate #(+ 3 %) 0)))
 
-((fn [s subs]
+((fn [s sub]
    (let [ct (count s)
-         sublen (quot ct subs)]
-     (letfn [(build-subs [i result]
-               (if (= i subs)
+         sublen (quot ct sub)]
+     (letfn [(build-sub [i result]
+               (if (= i sub)
                  result
-                 (recur (+ i 1) (conj result (map #(nth s % 0) (take sublen (iterate #(+ subs %) i)))))))]
-       (build-subs 0 []))))
+                 (recur (+ i 1) (conj result (map #(nth s % 0) (take sublen (iterate #(+ sub %) i)))))))]
+       (build-sub 0 []))))
  [1 2 3 4 5 6] 2)
 
 
@@ -670,9 +670,9 @@ reduce conj ()
          num-partitions (quot ct n)
          reduced-ct (* num-partitions n)]
      (letfn [(iter [n s i]
-                   (if (< i 0)
-                     []
-                     (conj (iter n s (dec i)) (take n (drop (* i n) s)))))]
+               (if (< i 0)
+                 []
+                 (conj (iter n s (dec i)) (take n (drop (* i n) s)))))]
        (iter n (take reduced-ct s) (dec num-partitions)))))
  2 (range 8))
 
@@ -685,3 +685,32 @@ reduce conj ()
 ;;; loop, removing while substring is found in numerals string
 ;;; remove in order, CM = 900, CD = 400, XC = 90, XL = 40, IX = 9, IV = 4
 ;;; M = 1000, D = 500, C = 100, L = 50, X = 10, V = 5, I = 1
+
+((fn remove-subs [s sub]
+   (let [match-index (.indexOf s sub)]
+     (if (= match-index -1)
+       "Not found"
+       (apply str (concat (take match-index s)
+                          (drop (+ match-index (count sub)) s))))))
+ "MCMXXI" "CM")
+
+((fn parse-roman [s]
+   (letfn [(sub-value [sub]
+             ({"CM" 900, "CD" 400, "XC" 90, "XL" 40, "IX" 9, "IV" 4,
+               "M" 1000, "D" 500, "C" 100, "L" 50, "X" 10, "V" 5, "I" 1} sub))
+           (remove-subs [s sub total]
+             (let [match-index (.indexOf s sub)]
+               (if (= match-index -1)
+                 [s total]
+                 (recur (apply str
+                               (concat (take match-index s)
+                                       (drop (+ match-index (count sub)) s))) sub (+ total (sub-value sub))))))
+           (iterate-syms [s-pair]
+             (let [syms ["CM" "CD" "XC" "XL" "IX" "IV" "M" "D" "C" "L" "X" "V" "I"]
+                   ct-syms (count syms)]
+               (loop [i 0 pair s-pair]
+                 (if (= i ct-syms)
+                   pair
+                   (recur (inc i) (remove-subs (first pair) (get syms i) (second pair)))))))]
+     (second (iterate-syms [s 0]))))
+ "MMMCMXCII")
