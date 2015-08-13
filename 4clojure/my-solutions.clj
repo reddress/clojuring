@@ -901,6 +901,7 @@ reduce conj ()
      (iter n [])))
  7)
 
+;;; daowen uses loop and recur instead of iter
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; #58 Function composition
@@ -939,3 +940,14 @@ reduce conj ()
 
 ;;;; better solutions use reduce to repeatedly apply fns to
 ;;;; (apply (last fns) outer-args)
+
+;;; daowen's solution
+(((fn [& fs]
+    (let [[f & fs] (reverse fs)]
+      (fn [& xs]
+        (reduce #(%2 %) (apply f xs) fs))))
+  rest reverse) [1 2 3 4])
+
+;;;; usage of (reduce f val coll)
+(reduce #(list %2 %1) [1 2] '(:a :b :c))
+;;;> (:c (:b (:a [1 2])))
