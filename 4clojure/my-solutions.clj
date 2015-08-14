@@ -951,3 +951,15 @@ reduce conj ()
 ;;;; usage of (reduce f val coll)
 (reduce #(list %2 %1) [1 2] '(:a :b :c))
 ;;;> (:c (:b (:a [1 2])))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; #75 Euler's Totient function
+
+((fn [n]
+   (letfn [(gcd [a b]
+             (cond
+               (> b a) (gcd b a)
+               (= b 0) a
+               :else (gcd b (- a b))))]
+     (count (filter #(= 1 (gcd n %)) (range 1 (inc n))))))
+ 40)
