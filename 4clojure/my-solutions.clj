@@ -21,9 +21,9 @@
 ;;; original solution
 (fn rev [lst]
   (letfn [(iter [lst result]
-            (if (empty? lst)
-              result
-              (iter (rest lst) (cons (first lst) result))))]
+                (if (empty? lst)
+                  result
+                  (iter (rest lst) (cons (first lst) result))))]
     (iter lst ())))
 
 ;;; Note: Use recur instead of repeating the function name, as seen in
@@ -62,11 +62,11 @@ reduce conj ()
 
 (defn single-let-fib [n]
   (letfn [(fib-iter [n result]
-            (if (= n 2)
-              result
-              (let [ct (count result)]
-                (recur (- n 1) (conj result (+ (nth result (- ct 1))
-                                               (nth result (- ct 2))))))))]
+                    (if (= n 2)
+                      result
+                      (let [ct (count result)]
+                        (recur (- n 1) (conj result (+ (nth result (- ct 1))
+                                                       (nth result (- ct 2))))))))]
     (fib-iter n [1 1])))
 
 ;;; daowen's solution
@@ -104,12 +104,12 @@ reduce conj ()
 
 ((fn [s]
    (letfn [(iter [s result]
-             (let [fst (first s)]
-               (cond
-                 (empty? s) result
-                 (not (coll? fst)) (iter (rest s) (conj result fst))
+                 (let [fst (first s)]
+                   (cond
+                     (empty? s) result
+                     (not (coll? fst)) (iter (rest s) (conj result fst))
                  ;;; concat, not conj or cons
-                 :else (iter (concat (iter fst []) (rest s)) result))))]
+                     :else (iter (concat (iter fst []) (rest s)) result))))]
      (iter (vec s) []))) '((1 2) (((3))) [4 [5 6]]))
 
 ;;; jfacorro's solution
@@ -239,9 +239,9 @@ reduce conj ()
 ;;; times out
 ((fn my-map [f coll]
    (letfn [(iter [f coll result]
-             (if (empty? coll)
-               result
-               (recur f (rest coll) (conj result (f (first coll))))))]
+                 (if (empty? coll)
+                   result
+                   (recur f (rest coll) (conj result (f (first coll))))))]
      (iter f coll [])))
  inc [2 3 4 5 6])
 
@@ -297,21 +297,21 @@ reduce conj ()
    (let [steps (vec nums)]
      (letfn [(all-same [coll] (every? #(= (first coll) %) coll))
              (increase-to [n step lim]
-               (if (< n lim)
-                 (increase-to (+ n step) step lim)
-                 n))
+                          (if (< n lim)
+                            (increase-to (+ n step) step lim)
+                            n))
              (increase-smallest-to-largest [vals]
-               (let [smallest-value (apply min vals)
-                     largest-value (apply max vals)
-                     smallest-index (.indexOf vals smallest-value)
-                     largest-index (.indexOf vals largest-value)]
-                 (assoc vals smallest-index (increase-to smallest-value
-                                                         (get steps smallest-index)
-                                                         largest-value))))
+                                           (let [smallest-value (apply min vals)
+                                                 largest-value (apply max vals)
+                                                 smallest-index (.indexOf vals smallest-value)
+                                                 largest-index (.indexOf vals largest-value)]
+                                             (assoc vals smallest-index (increase-to smallest-value
+                                                                                     (get steps smallest-index)
+                                                                                     largest-value))))
              (iterate [result]
-               (if (all-same result)
-                 (first result)
-                 (iterate (increase-smallest-to-largest result))))]
+                      (if (all-same result)
+                        (first result)
+                        (iterate (increase-smallest-to-largest result))))]
        (iterate steps))))
  7 5/7 2 3/5)
 
@@ -340,13 +340,13 @@ reduce conj ()
 ((fn [s-a s-b]
    ;;; copied difference from source
    (letfn [(the-diff [s1 s2] 
-             (if (< (count s1) (count s2))
-               (reduce (fn [result item] 
-                         (if (contains? s2 item) 
-                           (disj result item) 
-                           result))
-                       s1 s1)
-               (reduce disj s1 s2)))]
+                     (if (< (count s1) (count s2))
+                       (reduce (fn [result item] 
+                                 (if (contains? s2 item) 
+                                   (disj result item) 
+                                   result))
+                               s1 s1)
+                       (reduce disj s1 s2)))]
      (let [s-a-minus-b (the-diff s-a s-b)]
        (the-diff s-a s-a-minus-b))))
  #{0 1 2 3} #{2 3 4 5})
@@ -389,9 +389,9 @@ reduce conj ()
 
 ((fn infix-calc [& args]
    (letfn [(calc-stack [args result]
-             (if (empty? args)
-               result
-               (recur (drop 2 args) ((first args) result (second args)))))]
+                       (if (empty? args)
+                         result
+                         (recur (drop 2 args) ((first args) result (second args)))))]
      (calc-stack (rest args) (first args))))
  20 / 2 + 2 + 4 + 8 - 6 - 10 * 9)
 
@@ -419,15 +419,15 @@ reduce conj ()
 
 ((fn read-binary [s]
    (letfn [(str-to-seq [s]
-             (map (comp (partial + -48) int) (seq s)))
+                       (map (comp (partial + -48) int) (seq s)))
            (dot-product [v w]
-             (if (empty? v)
-               0
-               (+ (* (first v) (first w)) (dot-product (rest v) (rest w)))))
+                        (if (empty? v)
+                          0
+                          (+ (* (first v) (first w)) (dot-product (rest v) (rest w)))))
            (powers-of-2 [n]
-             (if (= 0 n)
-               ()
-               (cons (int (Math/pow 2 (- n 1))) (powers-of-2 (- n 1)))))]
+                        (if (= 0 n)
+                          ()
+                          (cons (int (Math/pow 2 (- n 1))) (powers-of-2 (- n 1)))))]
      (let [s-len (count s)]
        (dot-product (powers-of-2 s-len) (str-to-seq s)))))
  "11")
@@ -471,8 +471,8 @@ reduce conj ()
 
 ((fn count-smaller-than-sum-sq [coll]
    (letfn [(smaller-than-sum-square-digits? [n]
-             (let [digits-array (map #(- (int %) (int \0)) (str n))]
-               (< n (reduce + (map #(* % %) digits-array)))))]
+                                            (let [digits-array (map #(- (int %) (int \0)) (str n))]
+                                              (< n (reduce + (map #(* % %) digits-array)))))]
      (count (filter smaller-than-sum-square-digits? coll))))
  (range 10))
 
@@ -482,11 +482,11 @@ reduce conj ()
 
 ((fn [node]
    (letfn [(expand [node]
-             (if (nil? node)
-               nil
-               (list (expand (nth node 1))
-                     (first node)
-                     (expand (nth node 2)))))]
+                   (if (nil? node)
+                     nil
+                     (list (expand (nth node 1))
+                           (first node)
+                           (expand (nth node 2)))))]
      (let [flat-tree (flatten (expand node))]
        (= flat-tree (reverse flat-tree)))))
  '(:a (:b nil nil) (:c nil nil)))
@@ -544,12 +544,12 @@ reduce conj ()
          interleaved-results (interleave results inputs)
          grouped (apply hash-map (interleave unique-results (repeat [])))]
      (letfn [(accum [interl result]
-               (if (empty? interl)
-                 result
-                 (accum (drop 2 interl)
+                    (if (empty? interl)
+                      result
+                      (accum (drop 2 interl)
                         ;;; result)))]
-                        (assoc result (first interl)
-                               (conj (result (first interl)) (second interl))))))]
+                             (assoc result (first interl)
+                                    (conj (result (first interl)) (second interl))))))]
        (prn grouped)
        (accum interleaved-results grouped))))
  #(> % 5) [1 3 6 8])
@@ -605,9 +605,9 @@ reduce conj ()
 
 ((fn [n s]
    (letfn [(rotate-by-one [n s]
-             (if (= n 0)
-               s
-               (recur (- n 1) (conj (vec (rest s)) (first s)))))]
+                          (if (= n 0)
+                            s
+                            (recur (- n 1) (conj (vec (rest s)) (first s)))))]
      (rotate-by-one (mod n (count s)) s)))
  1 '(:a :b :c))
 
@@ -625,9 +625,9 @@ reduce conj ()
    (let [ct (count s)
          sublen (quot ct sub)]
      (letfn [(build-sub [i result]
-               (if (= i sub)
-                 result
-                 (recur (+ i 1) (conj result (map #(nth s % 0) (take sublen (iterate #(+ sub %) i)))))))]
+                        (if (= i sub)
+                          result
+                          (recur (+ i 1) (conj result (map #(nth s % 0) (take sublen (iterate #(+ sub %) i)))))))]
        (build-sub 0 []))))
  [1 2 3 4 5 6] 2)
 
@@ -673,9 +673,9 @@ reduce conj ()
          num-partitions (quot ct n)
          reduced-ct (* num-partitions n)]
      (letfn [(iter [n s i]
-               (if (< i 0)
-                 []
-                 (conj (iter n s (dec i)) (take n (drop (* i n) s)))))]
+                   (if (< i 0)
+                     []
+                     (conj (iter n s (dec i)) (take n (drop (* i n) s)))))]
        (iter n (take reduced-ct s) (dec num-partitions)))))
  2 (range 8))
 
@@ -699,22 +699,22 @@ reduce conj ()
 
 ((fn parse-roman [s]
    (letfn [(sub-value [sub]
-             ({"CM" 900, "CD" 400, "XC" 90, "XL" 40, "IX" 9, "IV" 4,
-               "M" 1000, "D" 500, "C" 100, "L" 50, "X" 10, "V" 5, "I" 1} sub))
+                      ({"CM" 900, "CD" 400, "XC" 90, "XL" 40, "IX" 9, "IV" 4,
+                        "M" 1000, "D" 500, "C" 100, "L" 50, "X" 10, "V" 5, "I" 1} sub))
            (remove-subs [s sub total]
-             (let [match-index (.indexOf s sub)]
-               (if (= match-index -1)
-                 [s total]
-                 (recur (apply str
-                               (concat (take match-index s)
-                                       (drop (+ match-index (count sub)) s))) sub (+ total (sub-value sub))))))
+                        (let [match-index (.indexOf s sub)]
+                          (if (= match-index -1)
+                            [s total]
+                            (recur (apply str
+                                          (concat (take match-index s)
+                                                  (drop (+ match-index (count sub)) s))) sub (+ total (sub-value sub))))))
            (iterate-syms [s-pair]
-             (let [syms ["CM" "CD" "XC" "XL" "IX" "IV" "M" "D" "C" "L" "X" "V" "I"]
-                   ct-syms (count syms)]
-               (loop [i 0 pair s-pair]
-                 (if (= i ct-syms)
-                   pair
-                   (recur (inc i) (remove-subs (first pair) (get syms i) (second pair)))))))]
+                         (let [syms ["CM" "CD" "XC" "XL" "IX" "IV" "M" "D" "C" "L" "X" "V" "I"]
+                               ct-syms (count syms)]
+                           (loop [i 0 pair s-pair]
+                             (if (= i ct-syms)
+                               pair
+                               (recur (inc i) (remove-subs (first pair) (get syms i) (second pair)))))))]
      (second (iterate-syms [s 0]))))
  "MMMCMXCII")
 
@@ -725,18 +725,18 @@ reduce conj ()
  (last
   ((fn prime-seq [n]
      (letfn [(is-prime? [n]
-               (loop [i 2]
-                 (cond (= i n) true
-                       (= (mod n i) 0) false
-                       :else (recur (inc i)))))
+                        (loop [i 2]
+                          (cond (= i n) true
+                                (= (mod n i) 0) false
+                                :else (recur (inc i)))))
              (next-prime [n]
-               (loop [i (inc n)]
-                 (if (is-prime? i)
-                   i
-                   (recur (inc i)))))
+                         (loop [i (inc n)]
+                           (if (is-prime? i)
+                             i
+                             (recur (inc i)))))
              (lazy-prime-seq [start]
-               (lazy-seq
-                (cons start (lazy-prime-seq (next-prime start)))))]
+                             (lazy-seq
+                              (cons start (lazy-prime-seq (next-prime start)))))]
        (take n (lazy-prime-seq 2))))
    5000)))  ;; 8.24 secs in ubuntu
 
@@ -798,10 +798,10 @@ reduce conj ()
 ;;;; #116 Prime sandwich
 ((fn is-mean [n]
    (letfn [(is-prime? [n]
-             (loop [i 2]
-               (cond (= i n) true
-                     (= (mod n i) 0) false
-                     :else (recur (inc i)))))]
+                      (loop [i 2]
+                        (cond (= i n) true
+                              (= (mod n i) 0) false
+                              :else (recur (inc i)))))]
      (let [next-prime
            (memoize
             (fn [n]
@@ -828,10 +828,10 @@ reduce conj ()
  (filter
   (fn is-mean [n]
     (letfn [(is-prime? [n]
-              (loop [i 2]
-                (cond (= i n) true
-                      (= (mod n i) 0) false
-                      :else (recur (inc i)))))]
+                       (loop [i 2]
+                         (cond (= i n) true
+                               (= (mod n i) 0) false
+                               :else (recur (inc i)))))]
       (let [next-prime
             (memoize
              (fn [n]
@@ -861,20 +861,20 @@ reduce conj ()
  (last 
   ((fn prime-seq [n]
      (letfn [(is-prime? [n]
-               (loop [i 2]
-                 (cond (= i n) true
-                       (= (mod n i) 0) false
-                       :else (recur (inc i)))))
+                        (loop [i 2]
+                          (cond (= i n) true
+                                (= (mod n i) 0) false
+                                :else (recur (inc i)))))
              (next-prime [n]
-               ((memoize
-                 (fn [n]
-                   (loop [i (inc n)]
-                     (if (is-prime? i)
-                       i
-                       (recur (inc i)))))) n))
+                         ((memoize
+                           (fn [n]
+                             (loop [i (inc n)]
+                               (if (is-prime? i)
+                                 i
+                                 (recur (inc i)))))) n))
              (lazy-prime-seq [start]
-               (lazy-seq
-                (cons start (lazy-prime-seq (next-prime start)))))]
+                             (lazy-seq
+                              (cons start (lazy-prime-seq (next-prime start)))))]
        (take n (lazy-prime-seq 2))))
    1000)))
 ;;;; but memoize isn't actually used because each (next-prime n) is only
@@ -891,13 +891,13 @@ reduce conj ()
 
 ((fn is-happy? [n]
    (letfn [(square-and-sum [n]
-             (let [digits (map #(read-string (str %)) (seq (str n)))]
-               (reduce + (map #(* % %) digits))))
+                           (let [digits (map #(read-string (str %)) (seq (str n)))]
+                             (reduce + (map #(* % %) digits))))
            (iter [n seen]
-             (cond
-               (= n 1) true
-               (some #{n} seen) false
-               :else (iter (square-and-sum n) (conj seen n))))]
+                 (cond
+                   (= n 1) true
+                   (some #{n} seen) false
+                   :else (iter (square-and-sum n) (conj seen n))))]
      (iter n [])))
  7)
 
@@ -908,11 +908,11 @@ reduce conj ()
 
 (((fn [& fs]
     (letfn [(iter [fs result]
-              (if (empty? fs)
-                result
-                (iter (drop-last fs)
-                      (fn [& args]
-                        (apply (last fs) args)))))]
+                  (if (empty? fs)
+                    result
+                    (iter (drop-last fs)
+                          (fn [& args]
+                            (apply (last fs) args)))))]
       ))
   rest reverse) [1 2 3 4])
 
@@ -932,9 +932,9 @@ reduce conj ()
           other-fns (drop-last fs)]
       (fn [& n]
         (letfn [(iter [others result]
-                  (if (empty? others)
-                    result
-                    (iter (drop-last others) ((last others) result))))]
+                      (if (empty? others)
+                        result
+                        (iter (drop-last others) ((last others) result))))]
           (iter other-fns (apply fst-fn n))))))
   #(.toUpperCase %) #(apply str %) take) 5 "hello world")
 
@@ -957,9 +957,50 @@ reduce conj ()
 
 ((fn [n]
    (letfn [(gcd [a b]
-             (cond
-               (> b a) (gcd b a)
-               (= b 0) a
-               :else (gcd b (- a b))))]
+                (cond
+                  (> b a) (gcd b a)
+                  (= b 0) a
+                  :else (gcd b (- a b))))]
      (count (filter #(= 1 (gcd n %)) (range 1 (inc n))))))
  40)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; #93 Partially flatten a sequence
+;;;; The result should be a sequence of sequences with only one level of
+;;;; nesting
+
+((fn partially-flatten [s]
+   (letfn [(reduce-to-single-level [elt]
+                                   (cond (not (coll? elt)) elt
+                                         (and (coll? elt) (not (coll? (first elt)))) elt
+                                         :else (reduce-to-single-level (first elt))))]
+     (cond (and (coll? s) (= 1 (count s))) (reduce-to-single-level s)
+           (and (coll? s) (> (count s) 1)) (map partially-flatten s)
+           :else s)))
+ [[1 2] [[3 4] [[[[5 6]]]]]])
+
+((fn partially-flatten [s]
+   (letfn [(reduce-to-single-level [elt]
+                                   (cond (not (coll? elt)) elt
+                                         (and (coll? elt) (not (coll? (first elt)))) (vector elt)
+                                         :else (reduce-to-single-level (first elt))))]
+     (mapcat reduce-to-single-level s)))
+ [[1 2] [[3 4] [5 6]]])
+
+;;;; stuck on uneven nesting
+
+;;;; daowen's solution
+((fn semi-flat [xs]
+   (mapcat #(if (coll? (first %))
+              (semi-flat %)
+              [%])
+           xs))
+ [[1 2] [[[3 4]] [[[[[5 6]]]]]]])
+
+((fn partially-flatten [s]
+   ;;; recursive call inside anonymous function, UAO
+   (mapcat (fn [s] (cond (coll? (first s)) (partially-flatten s)
+                         :else (vector s)))
+           s))
+ [[1 2] [[[3 4]] [[[[[5 6]]]]]]])
