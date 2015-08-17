@@ -1004,3 +1004,25 @@ reduce conj ()
                          :else (vector s)))
            s))
  [[1 2] [[[3 4]] [[[[[5 6]]]]]]])
+
+((fn partially-flatten [s]
+   (letfn [(to-single-level [s]
+                            (cond (not (coll? s)) s
+                                  (and (coll? s) (not (coll? (first s)))) s
+                                  :else (to-single-level (first s))))]
+     (cond (and (coll? s) (> (count s) 1)) (mapcat partially-flatten s)
+           (and (coll? s) (= (count s) 1)) (vector (to-single-level s))
+           :else s)))
+ [[1 2] [2]])
+
+ [[1 2] [[[[3 4]]] [[[[[[5 6]]]]]]]])
+
+ [[[[3 4]]] [[[[[5 6]]]]]])
+
+((fn to-single-level [s]
+   (cond (not (coll? s)) s
+         (and (coll? s) (not (coll? (first s)))) (vector s)
+         :else (to-single-level (first s))))
+ [[[1 2]]])
+
+(mapcat identity (map #(vector (vector %)) (range 9)))
