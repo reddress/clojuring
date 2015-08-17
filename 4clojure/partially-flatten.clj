@@ -55,3 +55,11 @@
     (mapcat eat-a-level s)))
 
 (partially-flatten-daowen '((1 2) ((3 4) (((5 6) (7 8))))))
+
+((fn partially-flatten-practice [s]
+   (letfn [(eat-a-level [elt]
+             (if (coll? (first elt))
+               (partially-flatten-practice elt)
+               (vector elt)))]
+     (mapcat eat-a-level s)))
+ '((1 2) ((3 4) (((5 6) (((7 8))))))))
