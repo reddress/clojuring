@@ -996,7 +996,7 @@ reduce conj ()
               (semi-flat %)
               [%])
            xs))
- [[1 2] [[[3 4]] [[[[[5 6]]]]]]])
+ [[1 2] [[[3 4]] [[[[[5 6] [7 8]]]]]]])
 
 ((fn partially-flatten [s]
    ;;; recursive call inside anonymous function, UAO
@@ -1027,6 +1027,7 @@ reduce conj ()
 
 (mapcat identity (map #(vector (vector %)) (range 9)))
 
+
 ((fn partially-flatten [s]
    (letfn [(to-single-level [s]
              (cond (not (coll? s)) (vector s)
@@ -1036,4 +1037,4 @@ reduce conj ()
              (if (not (coll? (first s))) (vector s)
                  (mapcat to-single-level s)))]
      (mapcat partially-flatten-list-of-nested s)))
- '((1 2) ((3 4) (((5 6))))))
+ '((1 2) ((3 4) ((5 6) ((7 8))))))
