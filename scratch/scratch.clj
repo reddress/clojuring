@@ -29,3 +29,21 @@
       (cons n (my-lazy-range (inc n)))))
    0) 999999))
 
+
+(defn mapdef [def ks]
+  "4clojure map defaults"
+  (loop [remks ks result {}]
+    (if (empty? remks)
+      result
+      (recur (rest remks) (conj result {(first remks) def})))))
+
+(defn build-result [n]
+  (loop [count n result []]
+    (if (> count 0)
+      (recur (dec count) (conj result count))
+      result)))
+
+(defn my-count [s]
+  (if (next s)
+    (+ 1 (my-count (next s)))
+    0))

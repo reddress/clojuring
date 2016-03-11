@@ -1,0 +1,2 @@
+Clojure in Action 2nd ed.
+11 mar 2016 p. 7, 1.2.1 
