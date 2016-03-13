@@ -37,6 +37,7 @@
       result
       (recur (rest remks) (conj result {(first remks) def})))))
 
+
 (defn build-result [n]
   (loop [count n result []]
     (if (> count 0)
@@ -47,3 +48,4 @@
   (if (next s)
     (+ 1 (my-count (next s)))
     0))
+
