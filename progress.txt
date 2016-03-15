@@ -1,4 +1,5 @@
 Clojure in Action 2nd ed.
 11 mar 2016 p. 7, 1.2.1 
 14 mar 2016 p. 55, ch. 3
-14 mar 2016 p. 65 multiple arity
+14 mar 2016 p. 65, multiple arity
+15 mar 2016 p. 98, ch. 4
