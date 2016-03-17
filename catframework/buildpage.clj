@@ -27,3 +27,13 @@
          (header title)
          (body content)
          (footer))))
+
+(defn read-components [content-map]
+  (println (content-map 0) (content-map 1) (content-map 2)))
+
+(defn pages [content-list]
+  (doseq [content content-list]
+    (apply page content)))
+
+(pages [["file1" "title1" "content1"]
+        ["file2" "title2" "content2"]])

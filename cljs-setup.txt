@@ -1,0 +1,41 @@
+Reference: https://funcool.github.io/clojurescript-unraveled/#tooling-compiler
+
+mkdir -p mywebapp/src/mywebapp
+
+;;; File: mywebapp/src/mywebapp/core.cljs
+
+(ns mywebapp.core)
+(enable-console-print!)
+(println "Hello World")
+
+
+;;; File: mywebapp/build.clj
+
+(require '[cljs.build.api :as b])
+
+(b/build "src"
+    {:output-to "main.js"
+     :output-dir "out/"
+     :source-map true
+     :main 'mywebapp.core
+     :verbose true
+     :optimizations :none})
+
+;;; shell
+
+cd mywebapp
+java -cp "../clojure/cljs.jar;./src" clojure.main build.clj
+
+;;; Output will be main.js in mywebapp folder.
+
+
+http://www.spacjer.com/blog/2014/09/12/clojurescript-javascript-interop/
+
+;;; a function must be exported, then can be called by namespace.core.fn-name
+
+(defn ^:export triple [x]
+  (+ x x x))
+
+;;; in browser
+
+mywebapp.core.triple(9);
