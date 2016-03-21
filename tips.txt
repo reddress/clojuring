@@ -1,0 +1,6 @@
+;;; http://tech.puredanger.com/2010/02/17/clojure-stack-trace-repl/
+
+Use (e) to print stack trace
+
+(use 'clojure.stacktrace)
+(e)

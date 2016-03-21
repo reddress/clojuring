@@ -1,0 +1,24 @@
+Sample Clojure code in folder "examples"
+
+(ns examples.hello
+  (:gen-class))
+
+(defn -main
+  [name]
+  (println (str "Hello " name "!")))
+
+(compile 'examples.hello)
+
+First, start Clojure with current directory also in the classpath
+
+> java -cp ".;clojure/clojure-1.8.0.jar" clojure.main
+
+;;; in Clojure
+(set! *compile-path* ".")
+
+;;; in Emacs
+Send the Clojure code
+
+To run the compiled code
+
+> java -cp ".;clojure/clojure-1.8.0.jar" examples.hello Bob
