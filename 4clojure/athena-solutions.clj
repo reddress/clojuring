@@ -81,3 +81,12 @@
         result))))
 
 (dupe '(:a :a :b))
+
+;;; #34
+
+((fn [start end]
+   (loop [i start result []]
+     (if (= i end)
+       result
+       (recur (inc i) (conj result i)))))
+ 1 4)
