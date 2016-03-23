@@ -5,3 +5,4 @@ Clojure in Action 2nd ed.
 15 mar 2016 p. 98, ch. 4
 16 mar 2016 p. 123, memfn
 21 mar 2016 p. 149, STM transactions
+23 mar 2016 p. 167, macro basics
